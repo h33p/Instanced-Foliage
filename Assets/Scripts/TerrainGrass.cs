@@ -23,21 +23,16 @@ public class GrassType {
 	public List<GrassChunk> chunks;
 	public int[,] chunks2D;
 
-	[System.NonSerialized]
-	public GrassChunk[] chunksSafe;
+	public List<Matrix4x4[]> renderMatrices;
+	public List<int> renderMatrixCount;
+
+	public List<Matrix4x4[]> renderMatricesSafe;
+	public List<int> renderMatrixCountSafe;
 
 	public int[,] detailMap;
 }
 
 public static class Extensions {
-
-	public static float DistanceToLine(Vector2 linePnt, Vector2 lineDir, Vector2 pnt)
-	{
-		lineDir.Normalize();//this needs to be a unit vector
-		var v = pnt - linePnt;
-		var d = Vector2.Dot(v, lineDir);
-		return Vector2.Distance(linePnt, linePnt + lineDir * d);
-	}
 
 	public static float GetHeightTriangle (Vector2 point, Vector3 ta, Vector3 tb, Vector3 tc) {
 		Vector3 normal = Vector3.Cross(tb - ta, tc - ta);
@@ -85,6 +80,7 @@ public class TerrainGrass : MonoBehaviour {
 	public Material mat;
 	public Mesh grassMesh;
 	public List<Matrix4x4[]> matrices;
+	Quaternion rotation = Quaternion.Euler (0, 180, 0);
 
 	public GrassType[] grass;
 
@@ -149,13 +145,9 @@ public class TerrainGrass : MonoBehaviour {
 			//Loops through close chunks, loads the needed chunks
 			for (int xC = (int)Mathf.Max (chunkPos.x - distance, 0); xC < (int)Mathf.Min (chunkPos.x + distance, grass [i].chunks2D.GetLength(0)); xC++) {
 				for (int yC = (int)Mathf.Max (chunkPos.y - distance, 0); yC < (int)Mathf.Min (chunkPos.y + distance, grass [i].chunks2D.GetLength(1)); yC++) {
-			//for (int xC = 0; xC < grass [i].chunks2D.GetLength(0); xC++) {
-			//	for (int yC = 0; yC < grass [i].chunks2D.GetLength(1); yC++) {
 					//Checks if we should load the chunk
 					if (Mathf.Sqrt ((xC - chunkPos.x) * (xC - chunkPos.x) + (yC - chunkPos.y) * (yC - chunkPos.y)) <= distance && grass [i].chunks2D [xC, yC] == -1) {
 						GrassChunk chunk = new GrassChunk (new Vector2 (xC, yC));
-						//GetChunk (ref chunk, ref grass [i].detailMap, t.terrainData.detailWidth, t.terrainData.detailHeight);
-
 						chunk.matrices = new Matrix4x4[1023];
 
 						for (float x1 = chunk.coords.x; x1 < Mathf.Min ((detailWidth - 1) * density / CHUNK_SIZE, chunk.coords.x + 1); x1 += 1f / CHUNK_SIZE) {
@@ -169,8 +161,6 @@ public class TerrainGrass : MonoBehaviour {
 
 								float chanceX = 0f;
 								float chanceY = 0f;
-
-								//Debug.Log (x + " " + x1 + " " + (t.terrainData.detailWidth - 1) * density / CHUNK_SIZE + " " + t.terrainData.detailHeight + " " + map.GetLength(0));
 
 								//Calculate the density of the grass based on the neighboring grass values
 								if ((int)x == 0)
@@ -190,25 +180,17 @@ public class TerrainGrass : MonoBehaviour {
 								chanceX = densityCurve.Evaluate (chanceX / 16);
 								chanceY = densityCurve.Evaluate (chanceY / 16);
 
-								//float interpX = Mathf.Lerp()
-
-								//grass [i].detailMap[(int) x, (int) y] > 0.001f) {
+								//Checks if should add the grass at certain point
 								if (chunk.len < 1022 && Mathf.Clamp01 (Mathf.PerlinNoise (x / detailWidth * size.z * noiseScale, y / detailWidth * size.x * noiseScale)) < chanceX * chanceY) {
-									//Debug.Log (chanceX * chanceY);
-									//Debug.Log (x + " " + y);
 									chunk.len++;
-									//Debug.Log (data.GetInterpolatedHeight ((float)y / (float)detailHeight, (float)x / (float)detailWidth));
 									chunk.matrices [chunk.len - 1] = Matrix4x4.TRS (
 										//Position
 										new Vector3 (position.x + size.x * (y + Mathf.PerlinNoise (x / detailWidth * size.z * 100f, y / detailHeight * size.x * 100f) * 2 * (1f / density)) / detailHeight,
 											position.y + data.GetInterpolatedHeightSafe ((float)y / (float)detailHeight * (heights.GetLength (0) - 1), (float)x / (float)detailWidth * (heights.GetLength (1) - 1), size, heights),
 											position.z + size.z * (x + Mathf.PerlinNoise (x / detailWidth * size.z * 100f, y / detailHeight * size.x * 100f) * 2 * (1f / density)) / detailWidth),
-										//new Vector3(size.x * y / detailHeight, 0f, size.z * x / detailWidth),
-											
 										//Rotation
-										new Quaternion (0, 0, 0, 1),
+										Quaternion.Lerp(new Quaternion (0, 0, 0, 1), rotation, Mathf.PerlinNoise (x / detailWidth * size.z * 100f, y / detailHeight * size.x * 100f)),
 										//Scale
-										//new Vector3(1, 1, 1));
 										new Vector3 (sizeCurve.Evaluate (Mathf.PerlinNoise (x / detailWidth * size.z * sizeScale, y / detailWidth * size.x * sizeScale)) * sizeMultiplier,
 											sizeCurve.Evaluate (Mathf.PerlinNoise (x / detailWidth * size.z * sizeScale, y / detailWidth * size.x * sizeScale)) * sizeMultiplier,
 											sizeCurve.Evaluate (Mathf.PerlinNoise (x / detailWidth * size.z * sizeScale, y / detailWidth * size.x * sizeScale)) * sizeMultiplier));
@@ -221,6 +203,28 @@ public class TerrainGrass : MonoBehaviour {
 					}
 				}
 			}
+
+			//Batch the grass into bigger arrays to call a little bit less of DrawMeshInstanced
+			grass [i].renderMatrices = new List<Matrix4x4[]> ();
+			grass [i].renderMatrixCount = new List<int> ();
+			int cC = -1; //Counter for the current grass chunk being checked
+			int rmC = 0; //Counter for the current return matrix array
+			int rmCT = 0; //Counter for the last matrix in the return array
+			grass [i].renderMatrices.Add (new Matrix4x4[1023]);
+			while (++cC < grass [i].chunks.Count) {
+				if (rmCT + grass [i].chunks [cC].len >= 1023) {
+					grass [i].renderMatrices.Add (new Matrix4x4[1023]);
+					grass [i].renderMatrixCount.Add (rmCT);
+					rmC++;
+					rmCT = 0;
+				}
+				int u = rmCT;
+				for (u = rmCT; u <= rmCT + grass [i].chunks [cC].len; u++) {
+					grass [i].renderMatrices [rmC] [u] = grass [i].chunks [cC].matrices [u-rmCT];
+				}
+				rmCT = u;
+			}
+			grass [i].renderMatrixCount.Add (rmCT);
 		}
 	}
 
@@ -234,18 +238,19 @@ public class TerrainGrass : MonoBehaviour {
 			size = t.terrainData.size;
 			data = t.terrainData;
 			chunkPos = PosToChunk (trackingObject.position);
+			rotation = Quaternion.Euler (0, 180, 0);
 			for (int i = 0; i < grass.Length; i++) {
 				if (grass [i].chunks != null) {
-					grass [i].chunksSafe = new GrassChunk[grass [i].chunks.Count];
-					for (int o = 0; o < grass [i].chunksSafe.Length; o++)
-						grass [i].chunksSafe[o] = grass [i].chunks [o];
+					grass [i].renderMatricesSafe = grass [i].renderMatrices;
+					grass [i].renderMatrixCountSafe = grass [i].renderMatrixCount;
 				}
 			}
 			//GrassUpdate ();
 			grassThread.Start ();
 		}
 		for (int i = 0; i < grass.Length; i++)
-			for (int o = 0; o < (grass [i].chunksSafe != null ? grass [i].chunksSafe.Length : 0); o++)
-				Graphics.DrawMeshInstanced (grass [i].grassMesh, 0, grass [i].material, grass [i].chunksSafe[o].matrices, grass [i].chunksSafe [o].len);
+			for (int o = 0; o < ((grass [i].renderMatricesSafe != null && grass [i].renderMatrixCountSafe != null) ? grass [i].renderMatrixCountSafe.Count : 0); o++) {
+				Graphics.DrawMeshInstanced (grass [i].grassMesh, 0, grass [i].material, grass [i].renderMatricesSafe [o], grass [i].renderMatrixCountSafe [o]);
+			}
 	}
 }

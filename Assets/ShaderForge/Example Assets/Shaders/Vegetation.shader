@@ -1,12 +1,16 @@
-// Shader created with Shader Forge v1.35 
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+// Shader created with Shader Forge v1.37 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.35;sub:START;pass:START;ps:flbk:Transparent/Cutout/Diffuse,iptp:0,cusa:False,bamd:0,lico:1,lgpr:1,limd:1,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:False,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:2,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:True,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:2,rntp:3,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False;n:type:ShaderForge.SFN_Final,id:0,x:34000,y:32640,varname:node_0,prsc:2|diff-322-OUT,spec-3-OUT,gloss-270-OUT,normal-2-RGB,transm-7-OUT,lwrap-6-OUT,clip-1-A,voffset-394-OUT;n:type:ShaderForge.SFN_Tex2d,id:1,x:33572,y:32631,ptovrint:False,ptlb:Diffuse,ptin:_Diffuse,varname:_Diffuse,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:66321cc856b03e245ac41ed8a53e0ecc,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:2,x:33572,y:32818,ptovrint:False,ptlb:Normal,ptin:_Normal,varname:_Normal,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:cb6c5165ed180c543be39ed70e72abc8,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Vector1,id:3,x:33777,y:32641,varname:node_3,prsc:2,v1:0.2;n:type:ShaderForge.SFN_Vector3,id:6,x:33572,y:33075,varname:node_6,prsc:2,v1:0.3275862,v2:0.3275862,v3:0.2911878;n:type:ShaderForge.SFN_Vector3,id:7,x:33572,y:32976,varname:node_7,prsc:2,v1:0.2824138,v2:0.3137931,v3:0.1568965;n:type:ShaderForge.SFN_Vector1,id:270,x:33777,y:32701,varname:node_270,prsc:2,v1:0.4;n:type:ShaderForge.SFN_VertexColor,id:321,x:33330,y:32501,varname:node_321,prsc:2;n:type:ShaderForge.SFN_Multiply,id:322,x:33777,y:32508,varname:node_322,prsc:2|A-330-OUT,B-1-RGB;n:type:ShaderForge.SFN_Lerp,id:330,x:33572,y:32478,varname:node_330,prsc:2|A-331-OUT,B-337-OUT,T-321-B;n:type:ShaderForge.SFN_Vector1,id:331,x:33330,y:32356,varname:node_331,prsc:2,v1:1;n:type:ShaderForge.SFN_Vector3,id:337,x:33330,y:32410,varname:node_337,prsc:2,v1:0.9632353,v2:0.8224623,v3:0.03541304;n:type:ShaderForge.SFN_VertexColor,id:389,x:32886,y:33347,varname:node_389,prsc:2;n:type:ShaderForge.SFN_NormalVector,id:391,x:33073,y:33231,prsc:2,pt:False;n:type:ShaderForge.SFN_Time,id:392,x:33073,y:33586,varname:node_392,prsc:2;n:type:ShaderForge.SFN_Sin,id:393,x:33479,y:33548,varname:node_393,prsc:2|IN-413-OUT;n:type:ShaderForge.SFN_Multiply,id:394,x:33729,y:33420,cmnt:Wind animation,varname:node_394,prsc:2|A-562-OUT,B-389-R,C-393-OUT,D-403-OUT;n:type:ShaderForge.SFN_Vector1,id:403,x:33479,y:33699,varname:node_403,prsc:2,v1:0.016;n:type:ShaderForge.SFN_Add,id:413,x:33298,y:33548,varname:node_413,prsc:2|A-519-OUT,B-392-T;n:type:ShaderForge.SFN_Multiply,id:519,x:33073,y:33457,varname:node_519,prsc:2|A-389-B,B-520-OUT;n:type:ShaderForge.SFN_Pi,id:520,x:32919,y:33494,varname:node_520,prsc:2;n:type:ShaderForge.SFN_Add,id:561,x:33294,y:33171,varname:node_561,prsc:2|A-563-OUT,B-391-OUT;n:type:ShaderForge.SFN_Normalize,id:562,x:33479,y:33280,varname:node_562,prsc:2|IN-561-OUT;n:type:ShaderForge.SFN_Vector3,id:563,x:33073,y:33131,cmnt:Wind direction,varname:node_563,prsc:2,v1:1,v2:0.5,v3:0.5;proporder:1-2;pass:END;sub:END;*/
+/*SF_DATA;ver:1.37;sub:START;pass:START;ps:flbk:Transparent/Cutout/Diffuse,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:1,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:False,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:2,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:True,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:2,rntp:3,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:0,x:34000,y:32640,varname:node_0,prsc:2|diff-322-OUT,spec-3-OUT,gloss-270-OUT,normal-2-RGB,transm-7-OUT,lwrap-6-OUT,clip-1-A,voffset-394-OUT;n:type:ShaderForge.SFN_Tex2d,id:1,x:33572,y:32631,ptovrint:False,ptlb:Diffuse,ptin:_Diffuse,varname:_Diffuse,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:66321cc856b03e245ac41ed8a53e0ecc,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:2,x:33572,y:32818,ptovrint:False,ptlb:Normal,ptin:_Normal,varname:_Normal,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:cb6c5165ed180c543be39ed70e72abc8,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Vector1,id:3,x:33777,y:32641,varname:node_3,prsc:2,v1:0.2;n:type:ShaderForge.SFN_Vector3,id:6,x:33572,y:33075,varname:node_6,prsc:2,v1:0.3275862,v2:0.3275862,v3:0.2911878;n:type:ShaderForge.SFN_Vector3,id:7,x:33572,y:32976,varname:node_7,prsc:2,v1:0.2824138,v2:0.3137931,v3:0.1568965;n:type:ShaderForge.SFN_Vector1,id:270,x:33777,y:32701,varname:node_270,prsc:2,v1:0.4;n:type:ShaderForge.SFN_VertexColor,id:321,x:33330,y:32501,varname:node_321,prsc:2;n:type:ShaderForge.SFN_Multiply,id:322,x:33777,y:32508,varname:node_322,prsc:2|A-330-OUT,B-1-RGB;n:type:ShaderForge.SFN_Lerp,id:330,x:33572,y:32478,varname:node_330,prsc:2|A-331-OUT,B-337-OUT,T-321-B;n:type:ShaderForge.SFN_Vector1,id:331,x:33330,y:32356,varname:node_331,prsc:2,v1:1;n:type:ShaderForge.SFN_Vector3,id:337,x:33330,y:32410,varname:node_337,prsc:2,v1:0.9632353,v2:0.8224623,v3:0.03541304;n:type:ShaderForge.SFN_Time,id:392,x:33073,y:33586,varname:node_392,prsc:2;n:type:ShaderForge.SFN_Sin,id:393,x:33460,y:33496,varname:node_393,prsc:2|IN-413-OUT;n:type:ShaderForge.SFN_Multiply,id:394,x:33729,y:33420,cmnt:Wind animation,varname:node_394,prsc:2|A-563-OUT,B-393-OUT,C-4624-OUT;n:type:ShaderForge.SFN_Add,id:413,x:33298,y:33548,varname:node_413,prsc:2|A-520-OUT,B-392-T,C-5310-OUT;n:type:ShaderForge.SFN_Pi,id:520,x:32919,y:33494,varname:node_520,prsc:2;n:type:ShaderForge.SFN_Vector3,id:563,x:33374,y:33356,cmnt:Wind direction,varname:node_563,prsc:2,v1:1,v2:0.5,v3:0.5;n:type:ShaderForge.SFN_Slider,id:3464,x:33314,y:34003,ptovrint:False,ptlb:intensity,ptin:_intensity,varname:node_3464,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:1,max:1;n:type:ShaderForge.SFN_TexCoord,id:5663,x:32856,y:33988,varname:node_5663,prsc:2,uv:0,uaff:False;n:type:ShaderForge.SFN_Multiply,id:4624,x:33687,y:33699,varname:node_4624,prsc:2|A-3464-OUT,B-5663-V;n:type:ShaderForge.SFN_FragmentPosition,id:6109,x:32687,y:33684,varname:node_6109,prsc:2;n:type:ShaderForge.SFN_Multiply,id:5310,x:33149,y:33722,varname:node_5310,prsc:2|A-7727-OUT,B-3834-OUT;n:type:ShaderForge.SFN_Slider,id:3834,x:32664,y:33904,ptovrint:False,ptlb:position_mul,ptin:_position_mul,varname:node_3834,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0,max:100;n:type:ShaderForge.SFN_Add,id:7727,x:32941,y:33684,varname:node_7727,prsc:2|A-6109-X,B-6109-Z;proporder:1-2-3464-3834;pass:END;sub:END;*/
 
 Shader "Shader Forge/Examples/Animated Vegetation" {
     Properties {
         _Diffuse ("Diffuse", 2D) = "white" {}
         _Normal ("Normal", 2D) = "bump" {}
+        _intensity ("intensity", Range(0, 1)) = 1
+        _position_mul ("position_mul", Range(0, 100)) = 0
         [HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
     }
     SubShader {
@@ -43,6 +47,8 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
             uniform float4 _TimeEditor;
             uniform sampler2D _Diffuse; uniform float4 _Diffuse_ST;
             uniform sampler2D _Normal; uniform float4 _Normal_ST;
+            uniform float _intensity;
+            uniform float _position_mul;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -85,11 +91,13 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
                 o.normalDir = UnityObjectToWorldNormal(v.normal);
                 o.tangentDir = normalize( mul( unity_ObjectToWorld, float4( v.tangent.xyz, 0.0 ) ).xyz );
                 o.bitangentDir = normalize(cross(o.normalDir, o.tangentDir) * v.tangent.w);
+                float3 node_563 = float3(1,0.5,0.5); // Wind direction
+                float node_520 = 3.141592654;
                 float4 node_392 = _Time + _TimeEditor;
-                v.vertex.xyz += (normalize((float3(1,0.5,0.5)+v.normal))*o.vertexColor.r*sin(((o.vertexColor.b*3.141592654)+node_392.g))*0.016);
+                v.vertex.xyz += (node_563*sin((node_520+node_392.g+((mul(unity_ObjectToWorld, v.vertex).r+mul(unity_ObjectToWorld, v.vertex).b)*_position_mul)))*(_intensity*o.uv0.g));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 float3 lightColor = _LightColor0.rgb;
-                o.pos = UnityObjectToClipPos(v.vertex );
+                o.pos = UnityObjectToClipPos( v.vertex );
                 UNITY_TRANSFER_FOG(o,o.pos);
                 TRANSFER_VERTEX_TO_FRAGMENT(o)
                 return o;
@@ -115,7 +123,7 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
                 float3 attenColor = attenuation * _LightColor0.xyz;
 ///////// Gloss:
                 float gloss = 0.4;
-                float specPow = exp2( gloss * 10.0+1.0);
+                float specPow = exp2( gloss * 10.0 + 1.0 );
 /////// GI Data:
                 UnityLight light;
                 #ifdef LIGHTMAP_OFF
@@ -200,6 +208,8 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
             uniform float4 _TimeEditor;
             uniform sampler2D _Diffuse; uniform float4 _Diffuse_ST;
             uniform sampler2D _Normal; uniform float4 _Normal_ST;
+            uniform float _intensity;
+            uniform float _position_mul;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -231,11 +241,13 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
                 o.normalDir = UnityObjectToWorldNormal(v.normal);
                 o.tangentDir = normalize( mul( unity_ObjectToWorld, float4( v.tangent.xyz, 0.0 ) ).xyz );
                 o.bitangentDir = normalize(cross(o.normalDir, o.tangentDir) * v.tangent.w);
+                float3 node_563 = float3(1,0.5,0.5); // Wind direction
+                float node_520 = 3.141592654;
                 float4 node_392 = _Time + _TimeEditor;
-                v.vertex.xyz += (normalize((float3(1,0.5,0.5)+v.normal))*o.vertexColor.r*sin(((o.vertexColor.b*3.141592654)+node_392.g))*0.016);
+                v.vertex.xyz += (node_563*sin((node_520+node_392.g+((mul(unity_ObjectToWorld, v.vertex).r+mul(unity_ObjectToWorld, v.vertex).b)*_position_mul)))*(_intensity*o.uv0.g));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 float3 lightColor = _LightColor0.rgb;
-                o.pos = UnityObjectToClipPos(v.vertex );
+                o.pos = UnityObjectToClipPos( v.vertex );
                 UNITY_TRANSFER_FOG(o,o.pos);
                 TRANSFER_VERTEX_TO_FRAGMENT(o)
                 return o;
@@ -260,7 +272,7 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
                 float3 attenColor = attenuation * _LightColor0.xyz;
 ///////// Gloss:
                 float gloss = 0.4;
-                float specPow = exp2( gloss * 10.0+1.0);
+                float specPow = exp2( gloss * 10.0 + 1.0 );
 ////// Specular:
                 float NdotL = saturate(dot( normalDirection, lightDirection ));
                 float node_3 = 0.2;
@@ -313,13 +325,13 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
             #pragma target 3.0
             uniform float4 _TimeEditor;
             uniform sampler2D _Diffuse; uniform float4 _Diffuse_ST;
+            uniform float _intensity;
+            uniform float _position_mul;
             struct VertexInput {
                 float4 vertex : POSITION;
-                float3 normal : NORMAL;
                 float2 texcoord0 : TEXCOORD0;
                 float2 texcoord1 : TEXCOORD1;
                 float2 texcoord2 : TEXCOORD2;
-                float4 vertexColor : COLOR;
             };
             struct VertexOutput {
                 V2F_SHADOW_CASTER;
@@ -327,30 +339,25 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
                 float2 uv1 : TEXCOORD2;
                 float2 uv2 : TEXCOORD3;
                 float4 posWorld : TEXCOORD4;
-                float3 normalDir : TEXCOORD5;
-                float4 vertexColor : COLOR;
             };
             VertexOutput vert (VertexInput v) {
                 VertexOutput o = (VertexOutput)0;
                 o.uv0 = v.texcoord0;
                 o.uv1 = v.texcoord1;
                 o.uv2 = v.texcoord2;
-                o.vertexColor = v.vertexColor;
-                o.normalDir = UnityObjectToWorldNormal(v.normal);
+                float3 node_563 = float3(1,0.5,0.5); // Wind direction
+                float node_520 = 3.141592654;
                 float4 node_392 = _Time + _TimeEditor;
-                v.vertex.xyz += (normalize((float3(1,0.5,0.5)+v.normal))*o.vertexColor.r*sin(((o.vertexColor.b*3.141592654)+node_392.g))*0.016);
+                v.vertex.xyz += (node_563*sin((node_520+node_392.g+((mul(unity_ObjectToWorld, v.vertex).r+mul(unity_ObjectToWorld, v.vertex).b)*_position_mul)))*(_intensity*o.uv0.g));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
-                o.pos = UnityObjectToClipPos(v.vertex );
+                o.pos = UnityObjectToClipPos( v.vertex );
                 TRANSFER_SHADOW_CASTER(o)
                 return o;
             }
             float4 frag(VertexOutput i, float facing : VFACE) : COLOR {
                 float isFrontFace = ( facing >= 0 ? 1 : 0 );
                 float faceSign = ( facing >= 0 ? 1 : -1 );
-                i.normalDir = normalize(i.normalDir);
-                i.normalDir *= faceSign;
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
-                float3 normalDirection = i.normalDir;
                 float4 _Diffuse_var = tex2D(_Diffuse,TRANSFORM_TEX(i.uv0, _Diffuse));
                 clip(_Diffuse_var.a - 0.5);
                 SHADOW_CASTER_FRAGMENT(i)
@@ -384,9 +391,10 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
             #pragma target 3.0
             uniform float4 _TimeEditor;
             uniform sampler2D _Diffuse; uniform float4 _Diffuse_ST;
+            uniform float _intensity;
+            uniform float _position_mul;
             struct VertexInput {
                 float4 vertex : POSITION;
-                float3 normal : NORMAL;
                 float2 texcoord0 : TEXCOORD0;
                 float2 texcoord1 : TEXCOORD1;
                 float2 texcoord2 : TEXCOORD2;
@@ -398,7 +406,6 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
                 float2 uv1 : TEXCOORD1;
                 float2 uv2 : TEXCOORD2;
                 float4 posWorld : TEXCOORD3;
-                float3 normalDir : TEXCOORD4;
                 float4 vertexColor : COLOR;
             };
             VertexOutput vert (VertexInput v) {
@@ -407,9 +414,10 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
                 o.uv1 = v.texcoord1;
                 o.uv2 = v.texcoord2;
                 o.vertexColor = v.vertexColor;
-                o.normalDir = UnityObjectToWorldNormal(v.normal);
+                float3 node_563 = float3(1,0.5,0.5); // Wind direction
+                float node_520 = 3.141592654;
                 float4 node_392 = _Time + _TimeEditor;
-                v.vertex.xyz += (normalize((float3(1,0.5,0.5)+v.normal))*o.vertexColor.r*sin(((o.vertexColor.b*3.141592654)+node_392.g))*0.016);
+                v.vertex.xyz += (node_563*sin((node_520+node_392.g+((mul(unity_ObjectToWorld, v.vertex).r+mul(unity_ObjectToWorld, v.vertex).b)*_position_mul)))*(_intensity*o.uv0.g));
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
                 o.pos = UnityMetaVertexPosition(v.vertex, v.texcoord1.xy, v.texcoord2.xy, unity_LightmapST, unity_DynamicLightmapST );
                 return o;
@@ -417,10 +425,7 @@ Shader "Shader Forge/Examples/Animated Vegetation" {
             float4 frag(VertexOutput i, float facing : VFACE) : SV_Target {
                 float isFrontFace = ( facing >= 0 ? 1 : 0 );
                 float faceSign = ( facing >= 0 ? 1 : -1 );
-                i.normalDir = normalize(i.normalDir);
-                i.normalDir *= faceSign;
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
-                float3 normalDirection = i.normalDir;
                 UnityMetaInput o;
                 UNITY_INITIALIZE_OUTPUT( UnityMetaInput, o );
                 
