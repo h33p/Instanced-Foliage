@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.448398, g: 0.4945191, b: 0.5546118, a: 1}
+  m_IndirectSpecularColor: {r: 0.18142897, g: 0.22309983, b: 0.28446016, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -193,7 +193,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1129155614}
   m_LocalRotation: {x: 0.17347628, y: -0, z: -0, w: 0.9848381}
-  m_LocalPosition: {x: 157, y: 16.5, z: 167.9}
+  m_LocalPosition: {x: 157, y: 13.6, z: 167.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -550,9 +550,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   draw: 1
+  castShadows: 0
+  receiveShadows: 1
   trackingObject: {fileID: 0}
   prefab: {fileID: 1634419894767958, guid: ba05a108c22b346c7b798582e3d78b63, type: 2}
-  density: 0.6
+  density: 1
   noiseScale: 1
   densityCurve:
     serializedVersion: 2
@@ -602,7 +604,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  sizeMultiplier: 1.5
+  sizeMultiplier: 0.5
   sizeCurve:
     serializedVersion: 2
     m_Curve:
@@ -625,26 +627,28 @@ MonoBehaviour:
   defaultFoliageMesh: {fileID: 4300006, guid: ae868d86d17cb4af593ebfb39f172f25, type: 3}
   threadScaling: 2
   foliage:
-  - foliageMesh: {fileID: 4300006, guid: ae868d86d17cb4af593ebfb39f172f25, type: 3}
+  - foliageMesh: {fileID: 4300004, guid: ae868d86d17cb4af593ebfb39f172f25, type: 3}
     baseMaterial: {fileID: 2100000, guid: f1f1218bf2f8840d2807387f1af5e7cb, type: 2}
     useMaterial: {fileID: 0}
     textures:
     - name: _MainTex
       texture: {fileID: 2800000, guid: 2c528fec5d95e4ac28cf46399b887662, type: 3}
-    minSize: {x: 0.1, y: 0.1, z: 0.1}
-    maxSize: {x: 0.2, y: 0.2, z: 0.2}
-    sizeScale: 0
+    minSize: {x: 0.3, y: 0.1, z: 0.3}
+    maxSize: {x: 0.6, y: 0.2, z: 0.6}
+    sizeScale: 10
+    normalIntensity: 0
     renderMatrixCount: 
     renderMatrixCountSafe: 
-  - foliageMesh: {fileID: 4300006, guid: ae868d86d17cb4af593ebfb39f172f25, type: 3}
+  - foliageMesh: {fileID: 4300004, guid: ae868d86d17cb4af593ebfb39f172f25, type: 3}
     baseMaterial: {fileID: 2100000, guid: f1f1218bf2f8840d2807387f1af5e7cb, type: 2}
     useMaterial: {fileID: 0}
     textures:
     - name: _MainTex
       texture: {fileID: 2800000, guid: d6cdc79ec19714fcd980ca3f6ac01a0a, type: 3}
-    minSize: {x: 0.1, y: 0.1, z: 0.1}
-    maxSize: {x: 0.2, y: 0.2, z: 0.2}
-    sizeScale: 0
+    minSize: {x: 0.3, y: 0.1, z: 0.3}
+    maxSize: {x: 0.6, y: 0.2, z: 0.6}
+    sizeScale: 10
+    normalIntensity: 0
     renderMatrixCount: 
     renderMatrixCountSafe: 
 --- !u!1 &2016054182

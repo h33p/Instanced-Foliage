@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
 using System;
-using System.Linq;
 
 [System.Serializable]
 public class FoliageChunk {
@@ -36,7 +35,9 @@ public class FoliageType {
 	public FoliageTexture[] textures;
 	public Vector3 minSize;
 	public Vector3 maxSize;
-	public float sizeScale;
+	public float sizeScale = 10;
+	[Range(0, 1)]
+	public float normalIntensity;
 	[System.NonSerialized]
 	public List<FoliageChunk> chunks;
 	public int[,] chunks2D;
@@ -54,6 +55,10 @@ public class FoliageType {
 }
 
 public static class Extensions {
+
+	public static Vector3 GetNormalTriangle (Vector3 ta, Vector3 tb, Vector3 tc) {
+		return Vector3.Cross(tb - ta, tc - ta);
+	}
 
 	public static float GetHeightTriangle (Vector2 point, Vector3 ta, Vector3 tb, Vector3 tc) {
 		Vector3 normal = Vector3.Cross(tb - ta, tc - ta);
@@ -85,12 +90,40 @@ public static class Extensions {
 		//Could have returned the value in the statements above, but had to do some debugging and might need to do it later
 		return ret;
 	}
+
+	//Calculates normal direction at a point. Does not work well. TODO: Fix Issues
+	public static Vector3 GetInterpolatedNormalSafe (this TerrainData data, float y, float x, Vector3 size, float normalIntensity, float[,] heights) {
+
+		//Get offset from the bottom left closest coordinate in the heights field
+		float rX = x - (int)x;
+		float rY = y - (int)y;
+
+		//Get heights on all points
+		float h1 = heights[Mathf.Min((int)x, heights.GetLength(0)-1), Mathf.Min((int)y, heights.GetLength(1)-1)] * size.y;
+		float h2 = heights[Mathf.Min(Mathf.CeilToInt(x), heights.GetLength(0)-1), Mathf.Min((int)y, heights.GetLength(1)-1)] * size.y;
+		float h3 = heights[Mathf.Min((int)x, heights.GetLength(0)-1), Mathf.Min(Mathf.CeilToInt(y), heights.GetLength(1)-1)] * size.y;
+		float h4 = heights[Mathf.Min(Mathf.CeilToInt(x), heights.GetLength(0)-1), Mathf.Min(Mathf.CeilToInt(y), heights.GetLength(1)-1)] * size.y;
+
+		Vector3 ret = new Vector3(0, 0, 0);
+
+		//Depending on the relative position, blend differently, each square is made up of 2 triangles, and this way of blending achieves best results
+		if (rX < rY)
+			ret = GetNormalTriangle (new Vector3 (0f, h1, 0f), new Vector3 (0f, h3, size.z / heights.GetLength(1)), new Vector3 (size.x / heights.GetLength(0), h4, size.z / heights.GetLength(1)));
+		else
+			ret = GetNormalTriangle (new Vector3 (0f, h1, 0f), new Vector3 (size.x / heights.GetLength(0), h2, 0f), new Vector3 (size.x / heights.GetLength(0), h4, size.z / heights.GetLength(1)));
+
+		//return ret;
+		return Vector3.Lerp(new Vector3(0, 1, 0), new Vector3(ret.z, ret.y, ret.x), normalIntensity);
+	}
 }
 
 [RequireComponent(typeof(Terrain))]
 public class TerrainFoliage : MonoBehaviour {
 
 	public bool draw = true;
+
+	public UnityEngine.Rendering.ShadowCastingMode castShadows;
+	public bool receiveShadows = true;
 
 	private float _distance = 1f;
 	private float _terDistance = 1f;
@@ -103,9 +136,9 @@ public class TerrainFoliage : MonoBehaviour {
 	public Transform trackingObject;
 	public Transform trackObj {
 		get {
-			if (trackingObject != null)
-				return trackingObject;
-			return Camera.main.transform;
+			if (trackingObject == null)
+				trackingObject = Camera.main.transform;
+			return trackingObject;
 		}
 	}
 
@@ -126,14 +159,14 @@ public class TerrainFoliage : MonoBehaviour {
 	public AnimationCurve densitySizeCurve = new AnimationCurve (new Keyframe (0, 0, 7.6f, 7.6f), 
 		                                         new Keyframe (0.195f, 0.774f, 0.7f, 0.7f),
 		                                         new Keyframe (1, 1, 0.0f, 0.0f));
-	public float sizeMultiplier = 0.3f;
+	public float sizeMultiplier = 1f;
 	public AnimationCurve sizeCurve = new AnimationCurve (new Keyframe (0, 0.3f, 0.913f, 0.913f),
 		                                  new Keyframe (1, 1, 0.0f, 0.0f));
 	public Material defaultMaterial;
 	public Mesh defaultFoliageMesh;
 	public List<Matrix4x4[]> matrices;
 	Quaternion rotation = Quaternion.Euler (0, 180, 0);
-	[Tooltip("Experimental thread scaling. If set to 2, 2 sides will be generated on separate threads, if set to 3, 4 parts will be generated separately.")]
+	[Tooltip("Thread scaling. If set to 2, 2 sides will be generated on separate threads, if set to 3, 4 parts will be generated separately.")]
 	[Range(1, 3)]
 	public int threadScaling = 2;
 	int _threadScaling;
@@ -150,7 +183,6 @@ public class TerrainFoliage : MonoBehaviour {
 	TerrainData data;
 	Vector3 position;
 	float[,] heights;
-
 
 	Thread foliageThread;
 
@@ -273,6 +305,7 @@ public class TerrainFoliage : MonoBehaviour {
 								}
 								float scalePerlin = Mathf.PerlinNoise (x / detailWidth * size.z * foliage [i].sizeScale, y / detailWidth * size.x * foliage [i].sizeScale);
 								float posPerlin = Mathf.PerlinNoise (x / detailWidth * size.z * 100f, y / detailHeight * size.x * 100f);
+								Vector3 normal = data.GetInterpolatedNormalSafe ((float)y / (float)detailHeight * (heights.GetLength (0) - 1), (float)x / (float)detailWidth * (heights.GetLength (1) - 1), size, foliage [i].normalIntensity, heights);
 
 								chunk.matrices [chunk.len - 1] = Matrix4x4.TRS (
 									//Position
@@ -280,7 +313,7 @@ public class TerrainFoliage : MonoBehaviour {
 										position.y + data.GetInterpolatedHeightSafe ((float)y / (float)detailHeight * (heights.GetLength (0) - 1), (float)x / (float)detailWidth * (heights.GetLength (1) - 1), size, heights),
 										position.z + size.z * (x + posPerlin * 2 * (1f / densityX)) / detailWidth),
 									//Rotation
-									Quaternion.Lerp (new Quaternion (0, 0, 0, 1), rotation, Mathf.PerlinNoise (x / detailWidth * size.z * 1000f, y / detailHeight * size.x * 1000f)),
+									Quaternion.FromToRotation (new Vector3(0, 1, 0), normal) * Quaternion.Lerp (new Quaternion (0, 0, 0, 1), rotation, Mathf.PerlinNoise (x / detailWidth * size.z * 1000f, y / detailHeight * size.x * 1000f)),
 									//Scale
 									new Vector3 (Mathf.Lerp(foliage [i].minSize.x, foliage [i].maxSize.x, sizeCurve.Evaluate (scalePerlin)) * sizeMultiplier * densitySized,
 										Mathf.Lerp(foliage [i].minSize.y, foliage [i].maxSize.y, sizeCurve.Evaluate (scalePerlin)) * sizeMultiplier * densitySized,
@@ -453,7 +486,7 @@ public class TerrainFoliage : MonoBehaviour {
 		if (draw) {
 			for (int i = 0; i < foliage.Length; i++)
 				for (int o = 0; o < ((foliage [i].renderMatricesSafe != null && foliage [i].renderMatrixCountSafe != null) ? foliage [i].renderMatrixCountSafe.Count : 0); o++)
-					Graphics.DrawMeshInstanced (foliage [i].foliageMesh, 0, foliage [i].useMaterial, foliage [i].renderMatricesSafe [o], foliage [i].renderMatrixCountSafe [o]);
+					Graphics.DrawMeshInstanced (foliage [i].foliageMesh, 0, foliage [i].useMaterial, foliage [i].renderMatricesSafe [o], foliage [i].renderMatrixCountSafe [o], null, castShadows, receiveShadows);
 		}
 
 	}
