@@ -553,7 +553,7 @@ MonoBehaviour:
   castShadows: 0
   receiveShadows: 1
   trackingObject: {fileID: 0}
-  prefab: {fileID: 1634419894767958, guid: ba05a108c22b346c7b798582e3d78b63, type: 2}
+  prefab: {fileID: 0}
   density: 1
   noiseScale: 1
   densityCurve:
@@ -562,38 +562,38 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 3.9632478
-      outSlope: 3.9632478
+      inSlope: 3.963
+      outSlope: 3.963
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.2359734
-      value: 0.5781558
-      inSlope: 1.334832
-      outSlope: 1.334832
+      time: 0.235
+      value: 0.578
+      inSlope: 1.334
+      outSlope: 1.334
       tangentMode: 0
     - serializedVersion: 2
       time: 1
       value: 1
-      inSlope: 0.0692682
-      outSlope: 0.0692682
+      inSlope: 0.06
+      outSlope: 0.06
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   densitySizeCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 7.6086574
-      outSlope: 7.6086574
+      inSlope: 7.6
+      outSlope: 7.6
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.1954469
-      value: 0.774393
-      inSlope: 0.7090575
-      outSlope: 0.7090575
+      time: 0.195
+      value: 0.774
+      inSlope: 0.7
+      outSlope: 0.7
       tangentMode: 0
     - serializedVersion: 2
       time: 1
@@ -603,16 +603,16 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
-  sizeMultiplier: 0.5
+    m_RotationOrder: 4
+  sizeMultiplier: 1
   sizeCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
       value: 0.3
-      inSlope: 0.91342306
-      outSlope: 0.91342306
+      inSlope: 0.913
+      outSlope: 0.913
       tangentMode: 0
     - serializedVersion: 2
       time: 1
@@ -622,12 +622,12 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   defaultMaterial: {fileID: 2100000, guid: f1f1218bf2f8840d2807387f1af5e7cb, type: 2}
   defaultFoliageMesh: {fileID: 4300006, guid: ae868d86d17cb4af593ebfb39f172f25, type: 3}
   threadScaling: 2
   foliage:
-  - foliageMesh: {fileID: 4300004, guid: ae868d86d17cb4af593ebfb39f172f25, type: 3}
+  - foliageMesh: {fileID: 4300006, guid: ae868d86d17cb4af593ebfb39f172f25, type: 3}
     baseMaterial: {fileID: 2100000, guid: f1f1218bf2f8840d2807387f1af5e7cb, type: 2}
     useMaterial: {fileID: 0}
     textures:
@@ -639,7 +639,7 @@ MonoBehaviour:
     normalIntensity: 0
     renderMatrixCount: 
     renderMatrixCountSafe: 
-  - foliageMesh: {fileID: 4300004, guid: ae868d86d17cb4af593ebfb39f172f25, type: 3}
+  - foliageMesh: {fileID: 4300006, guid: ae868d86d17cb4af593ebfb39f172f25, type: 3}
     baseMaterial: {fileID: 2100000, guid: f1f1218bf2f8840d2807387f1af5e7cb, type: 2}
     useMaterial: {fileID: 0}
     textures:

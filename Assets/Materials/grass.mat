@@ -136,10 +136,10 @@ Material:
     - _UVSec: 0
     - _WindQuality: 0
     - _ZWrite: 1
-    - _intensity: 0.328
-    - _intensity2: 0.05
-    - _intensity3: 0.02
-    - _intensity4: 0.01
+    - _intensity: 0.128
+    - _intensity2: 0.005
+    - _intensity3: 0.01
+    - _intensity4: 0.003
     - _length: 4
     - _position_mul: 4.67
     - _position_mul2: 2
@@ -147,8 +147,8 @@ Material:
     - _position_mul4: 5
     - _speed: 1.49
     - _speed2: 2.18
-    - _speed3: 3
-    - _speed4: 10
+    - _speed3: 8
+    - _speed4: 30
     m_Colors:
     - _Color: {r: 0.79379004, g: 0.76222986, b: 0.6523573, a: 1}
     - _Diffuse: {r: 0.9117647, g: 0.8760425, b: 0.8179066, a: 1}
@@ -161,7 +161,7 @@ Material:
     - _TranslucencyColor: {r: 0.73, g: 0.85, b: 0.41, a: 1}
     - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
-    - _windDir: {r: 0, g: 0.5, b: 0.5, a: 0}
+    - _windDir: {r: 0, g: 0.23647231, b: 0.8774119, a: 0}
     - _windDir2: {r: -1, g: 0.2, b: 0.4, a: 0}
     - _windDir3: {r: 0.3, g: 0.5, b: 0.7, a: 0}
     - _windDir4: {r: 1, g: 0.5, b: 0.5, a: 0}

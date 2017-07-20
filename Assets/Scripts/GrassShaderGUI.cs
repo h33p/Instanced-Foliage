@@ -144,7 +144,7 @@ public class GrassShaderGUI : ShaderGUI {
 				EditorGUILayout.EndHorizontal ();
 				EditorGUILayout.BeginHorizontal ();
 				EditorGUILayout.LabelField (properties[speed3].displayName);
-				properties[speed3].floatValue = EditorGUILayout.Slider (properties[speed3].floatValue, 0, 10);
+				properties[speed3].floatValue = EditorGUILayout.Slider (properties[speed3].floatValue, 0, 20);
 				EditorGUILayout.EndHorizontal ();
 				EditorGUILayout.EndVertical ();
 			}
@@ -162,11 +162,11 @@ public class GrassShaderGUI : ShaderGUI {
 				properties[windDir4].vectorValue = EditorGUILayout.Vector3Field ("", properties[windDir4].vectorValue);
 				EditorGUILayout.BeginHorizontal ();
 				EditorGUILayout.LabelField (properties[intens4].displayName);
-				properties[intens4].floatValue = EditorGUILayout.Slider (properties[intens4].floatValue, 0, 0.2f);
+				properties[intens4].floatValue = EditorGUILayout.Slider (properties[intens4].floatValue, 0, 0.1f);
 				EditorGUILayout.EndHorizontal ();
 				EditorGUILayout.BeginHorizontal ();
 				EditorGUILayout.LabelField (properties[speed4].displayName);
-				properties[speed4].floatValue = EditorGUILayout.Slider (properties[speed4].floatValue, 0, 10);
+				properties[speed4].floatValue = EditorGUILayout.Slider (properties[speed4].floatValue, 0, 50);
 				EditorGUILayout.EndHorizontal ();
 				EditorGUILayout.EndVertical ();
 			}
